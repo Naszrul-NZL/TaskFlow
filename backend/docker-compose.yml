@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  php-api:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    container_name: task_reminder_api
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/var/www/html
+      - ./db:/var/www/db
+    restart: unless-stopped
