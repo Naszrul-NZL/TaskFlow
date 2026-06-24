@@ -2,7 +2,7 @@
 header("Content-Type: application/json");
 
 try {
-    $dbPath = '/var/www/db/database.sqlite';
+    $dbPath = 'C:/xampp/htdocs/TaskFlow/db/database.sqlite';
     $pdo = new PDO("sqlite:" . $dbPath);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 

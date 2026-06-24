@@ -1,6 +1,6 @@
 <?php
 function getDB() {
-    $dbPath = '/var/www/db/database.sqlite';
+    $dbPath = 'C:/xampp/htdocs/TaskFlow/db/database.sqlite';
     
     try {
         $pdo = new PDO("sqlite:" . $dbPath);
