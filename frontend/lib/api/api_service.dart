@@ -24,14 +24,14 @@ class ApiService {
   }
 
   // CATEGORIES
-  static Future<Map<String, dynamic>> getCategories(int userId) async {
-    final response = await http.post(
-      Uri.parse('$baseUrl/categories/get_categories.php'),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'user_id': userId}),
-    );
-    return jsonDecode(response.body);
-  }
+  static Future<Map<String, dynamic>> getCategories() async {
+      final response = await http.post(
+        Uri.parse('$baseUrl/categories/get_categories.php'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({}),
+      );
+      return jsonDecode(response.body);
+    }
 
   static Future<Map<String, dynamic>> addCategory(int userId, String name, String color) async {
     final response = await http.post(

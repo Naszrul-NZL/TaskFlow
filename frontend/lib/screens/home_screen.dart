@@ -4,7 +4,6 @@ import '../api/api_service.dart';
 import '../models/task.dart';
 import 'add_task_screen.dart';
 import 'edit_task_screen.dart';
-import 'category_screen.dart';
 import 'profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -64,14 +63,13 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('TaskFlow'),
         automaticallyImplyLeading: false,
       ),
-      body: IndexedStack(
-        index: _currentIndex,
-        children: [
-          _buildTaskList(),
-          CategoryScreen(userId: _userId),
-          ProfileScreen(userId: _userId),
-        ],
-      ),
+    body: IndexedStack(
+      index: _currentIndex,
+      children: [
+        _buildTaskList(),
+        ProfileScreen(userId: _userId),
+      ],
+    ),
       floatingActionButton: _currentIndex == 0
           ? FloatingActionButton(
               onPressed: () async {
@@ -91,7 +89,6 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: (index) => setState(() => _currentIndex = index),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.category), label: 'Categories'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),

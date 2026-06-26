@@ -35,7 +35,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
   }
 
   void _loadCategories() async {
-    Map<String, dynamic> result = await ApiService.getCategories(widget.userId);
+    Map<String, dynamic> result = await ApiService.getCategories();
     if (result['success']) {
       List data = result['data'];
       setState(() {
