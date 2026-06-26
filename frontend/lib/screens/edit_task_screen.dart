@@ -101,8 +101,11 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
       appBar: AppBar(
         title: const Text('Edit Task'),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
+  body: Center(
+    child: SingleChildScrollView(
+      padding: const EdgeInsets.all(24.0),
+      child: SizedBox(
+        width: 500,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -143,10 +146,11 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                 prefixIcon: Icon(Icons.check_circle_outline),
                 hintText: 'Status',
               ),
-              items: const [
-                DropdownMenuItem(value: 'Pending', child: Text('Pending')),
-                DropdownMenuItem(value: 'Completed', child: Text('Completed')),
-              ],
+            items: const [
+              DropdownMenuItem(value: 'Pending', child: Text('Pending')),
+              DropdownMenuItem(value: 'In Progress', child: Text('In Progress')),
+              DropdownMenuItem(value: 'Completed', child: Text('Completed')),
+            ],
               onChanged: (value) => setState(() => _status = value!),
             ),
             const SizedBox(height: 16),
@@ -185,6 +189,8 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
               ),
             ),
           ],
+        ),
+        ),
         ),
       ),
     );

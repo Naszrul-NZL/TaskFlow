@@ -91,8 +91,11 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       appBar: AppBar(
         title: const Text('Add Task'),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
+  body: Center(
+    child: SingleChildScrollView(
+      padding: const EdgeInsets.all(24.0),
+      child: SizedBox(
+        width: 500,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -162,6 +165,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               ),
             ),
           ],
+        ),
+        ),
         ),
       ),
     );
