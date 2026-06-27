@@ -56,16 +56,12 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
-          child: SizedBox(
-            width: 400,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 400),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
-                  Icons.task_alt,
-                  size: 80,
-                  color: Color(0xFF9E6068),
-                ),
+                Image.asset('assets/TaskFlow_logoV1.png', height: 200),
                 const SizedBox(height: 16),
                 const Text(
                   'TaskFlow',

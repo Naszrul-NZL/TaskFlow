@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'screens/register_screen.dart';
+import 'screens/login_screen.dart';
 import 'screens/home_screen.dart';
 
 void main() async {
@@ -84,7 +85,7 @@ class MyApp extends StatelessWidget {
           titleLarge: TextStyle(color: Color(0xFF3D1A1F), fontWeight: FontWeight.bold),
         ),
       ),
-      home: isLoggedIn ? const HomeScreen() : const RegisterScreen(),
+      home: isLoggedIn ? const HomeScreen() : const LoginScreen(),
     );
   }
 }

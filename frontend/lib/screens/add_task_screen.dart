@@ -94,8 +94,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   body: Center(
     child: SingleChildScrollView(
       padding: const EdgeInsets.all(24.0),
-      child: SizedBox(
-        width: 500,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 500),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

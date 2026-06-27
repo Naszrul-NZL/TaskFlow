@@ -16,7 +16,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _currentIndex = 0;
   int _userId = 0;
   List<Task> _tasks = [];
   List<Category> _categories = [];
@@ -106,32 +105,24 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           },
         ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.task_alt, color: Colors.white, size: 24),
-            const SizedBox(width: 8),
-            const Text('TaskFlow'),
-          ],
-        ),
+        title: const Text('TaskFlow'),
+        centerTitle: true,
         automaticallyImplyLeading: false,
       ),
       body: _buildTaskList(),
 
-      floatingActionButton: _currentIndex == 0
-          ? FloatingActionButton(
-              onPressed: () async {
-                await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AddTaskScreen(userId: _userId),
-                  ),
-                );
-                _loadTasks();
-              },
-              child: const Icon(Icons.add),
-            )
-          : null,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AddTaskScreen(userId: _userId),
+            ),
+          );
+          _loadTasks();
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 
@@ -143,8 +134,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       children: [
     Center(
-      child: SizedBox(
-        width: 600,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 600),
         child: Container(
           color: Colors.white,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -230,8 +221,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 )
           : Center(
-              child: SizedBox(
-                width: 600,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 600),
                 child: ListView.builder(
                   padding: const EdgeInsets.all(16),
                   itemCount: _filteredTasks.length,

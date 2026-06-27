@@ -60,12 +60,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
-          child: SizedBox(
-            width: 400,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 400),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
+                Image.asset('assets/TaskFlow_logoV1.png', height: 200),
+                const SizedBox(height: 16),
                 const Text(
                   'Welcome to TaskFlow',
                   style: TextStyle(
