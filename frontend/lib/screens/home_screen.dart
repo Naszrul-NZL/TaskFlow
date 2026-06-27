@@ -6,6 +6,7 @@ import '../models/category.dart';
 import 'add_task_screen.dart';
 import 'edit_task_screen.dart';
 import 'profile_screen.dart';
+import 'detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -94,20 +95,29 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_currentIndex == 0
-            ? 'TaskFlow'
-            : _currentIndex == 1
-                ? 'Profile'
-                : 'TaskFlow'),
+        leading: IconButton(
+          icon: const Icon(Icons.person, color: Colors.white),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProfileScreen(userId: _userId),
+              ),
+            );
+          },
+        ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.task_alt, color: Colors.white, size: 24),
+            const SizedBox(width: 8),
+            const Text('TaskFlow'),
+          ],
+        ),
         automaticallyImplyLeading: false,
       ),
-      body: IndexedStack(
-        index: _currentIndex,
-        children: [
-          _buildTaskList(),
-          ProfileScreen(userId: _userId),
-        ],
-      ),
+      body: _buildTaskList(),
+
       floatingActionButton: _currentIndex == 0
           ? FloatingActionButton(
               onPressed: () async {
@@ -122,14 +132,6 @@ class _HomeScreenState extends State<HomeScreen> {
               child: const Icon(Icons.add),
             )
           : null,
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) => setState(() => _currentIndex = index),
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-        ],
-      ),
     );
   }
 
@@ -235,9 +237,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: _filteredTasks.length,
                   itemBuilder: (context, index) {
                     Task task = _filteredTasks[index];
-                    return Card(
-                      margin: const EdgeInsets.only(bottom: 12),
-                      child: ListTile(
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TaskDetailScreen(
+                              task: task,
+                              categories: _categories,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Card(
+                        margin: const EdgeInsets.only(bottom: 12),
+                        child: ListTile(
                         leading: Checkbox(
                           value: task.status == 'Completed',
                           onChanged: (value) => _toggleStatus(task),
@@ -302,13 +316,34 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             ),
                             IconButton(
-                              icon: const Icon(Icons.delete,
-                                  color: Color(0xFF9E6068)),
-                              onPressed: () => _deleteTask(task.id),
+                              icon: const Icon(Icons.delete, color: Color(0xFF9E6068)),
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    title: const Text('Delete Task'),
+                                    content: const Text('Are you sure you want to delete this task?'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(context),
+                                        child: const Text('Cancel', style: TextStyle(color: Color(0xFF9E6068))),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                          _deleteTask(task.id);
+                                        },
+                                        child: const Text('Delete'),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
                             ),
                           ],
                         ),
                       ),
+                    )
                     );
                   },
                 ),

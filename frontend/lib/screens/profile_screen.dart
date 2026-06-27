@@ -41,6 +41,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+      title: const Text('Profile'),
+    ),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),

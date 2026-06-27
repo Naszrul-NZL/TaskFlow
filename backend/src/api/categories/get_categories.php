@@ -8,6 +8,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo json_encode(["success" => false, "message" => "Method not allowed"]);
+    exit();
+}
+
 require_once '../db_connect.php';
 
 $pdo = getDB();
