@@ -28,6 +28,13 @@ if (empty($name) || empty($email) || empty($password)) {
 
 $pdo = getDB();
 
+$stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+$stmt->execute([$email]);
+if ($stmt->fetch()) {
+    echo json_encode(["success" => false, "message" => "Email already registered"]);
+    exit();
+}
+
 $stmt = $pdo->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
 $stmt->execute([$name, $email, $password]);
 
